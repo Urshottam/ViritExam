@@ -7,24 +7,15 @@ test('test', async ({ page }) => {
   await page.getByRole('checkbox', { name: 'I agree to the Terms of' }).click();
   await page.getByText('Welcome to Authorized PartnerRegister Your AgencyBefore you get started, please').click();
   await page.getByRole('button', { name: 'Continue' }).click();
-
   await page.getByRole('textbox', { name: 'First Name' }).fill('Urshottam');
   await page.getByRole('textbox', { name: 'Last Name' }).fill('Maharjan');
   await page.getByRole('textbox', { name: 'Email Address' }).fill('urshottammaharjan98@gmail.com');
   await page.getByRole('textbox', { name: 'Phone Number' }).fill('9769372590');
   await page.locator('input[name="password"]').fill('Urshottam@123');
   await page.locator('input[name="confirmPassword"]').fill('Urshottam@123');
-
-  // Send OTP
   await page.getByRole('button', { name: 'Next' }).click();
-
-  // Manually enter your OTP here before running
   await page.getByRole('textbox').fill('176630');
-
-  // Verify OTP
   await page.getByRole('button', { name: 'Verify Code' }).click();
-
-  // Continue with the remaining steps
   await page.getByRole('textbox', { name: 'Name' }).fill('GREATPLAY');
   await page.getByRole('textbox', { name: 'Role in Agency' }).fill('CTO');
   await page.getByRole('textbox', { name: 'Email Address' }).fill('greatplay12@gmail.com');
@@ -33,7 +24,6 @@ test('test', async ({ page }) => {
   await page.getByRole('combobox').click();
   await page.locator('div').filter({ hasText: /^Nepal$/ }).click();
   await page.getByRole('button', { name: 'Next' }).click();
-
   await page.getByRole('combobox', { name: 'Years of Experience' }).click();
   await page.getByRole('option', { name: '5 years' }).click();
   await page.getByRole('spinbutton', { name: 'Number of Students Recruited' }).fill('1000');
@@ -41,19 +31,16 @@ test('test', async ({ page }) => {
   await page.getByRole('spinbutton', { name: 'Success Metrics' }).fill('25');
   await page.getByRole('checkbox', { name: 'Test Prepration' }).click();
   await page.getByRole('button', { name: 'Next' }).click();
-
   await page.getByRole('textbox', { name: 'Business Registration Number' }).fill('7654');
   await page.getByRole('combobox', { name: 'Preferred Countries' }).click();
   await page.locator('div').filter({ hasText: /^Nepal$/ }).click();
   await page.getByRole('checkbox', { name: 'Colleges' }).click();
   await page.getByRole('textbox', { name: 'Certification Details (' }).fill('NOC');
   await page.getByRole('button', { name: 'Submit' }).click();
-
   await page.getByRole('button', { name: 'Choose File' }).first().setInputFiles('WhatsApp Image 2026-06-23 at 07.46.07.jpeg');
   await page.getByRole('button', { name: 'Choose File' }).nth(1).setInputFiles('WhatsApp Image 2026-06-23 at 08.35.07.jpeg');
-
   await page.getByRole('button', { name: 'Submit' }).click();
-
   await page.goto('https://authorized-partner.vercel.app/admin/profile');
-  await expect(page.getByText('Profile')).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'My Profile' })).toBeVisible();
+  await expect(page.getByText('Urshottam Maharjan')).toBeVisible();
 });
